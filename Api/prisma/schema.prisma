@@ -16,7 +16,7 @@ model Users {
   email     String
   password  String
   createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
 
   @@map("USERS")
 }
@@ -25,7 +25,7 @@ model Category {
   id        String   @id @default(uuid())
   name      String
   createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
 
   products Product[]
   @@map("CATEGORIES")
@@ -38,7 +38,7 @@ model Product {
   description String
   banner      String
   createdAt   DateTime @default(now()) @db.Timestamp(6)
-  updatedAt   DateTime @default(now()) @db.Timestamp(6)
+  updatedAt   DateTime @updatedAt
 
   category    Category @relation(fields: [category_id], references: [id])
   category_id String
@@ -54,7 +54,7 @@ model Order {
   draft     Boolean  @default(true)
   name      String?
   createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
 
 
   items Item[]
@@ -66,7 +66,7 @@ model Item {
   amount Float
 
   createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @default(now()) @db.Timestamp(6)
+  updatedAt DateTime @updatedAt
 
   order   Order   @relation(fields: [order_id], references: [id])
   product Product @relation(fields: [product_id], references: [id])
