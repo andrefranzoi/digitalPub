@@ -2,4 +2,3 @@ node_modules/
 prisma/migrations/
 .env
 yarn.lock
-tsconfig.json
