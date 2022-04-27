@@ -15,8 +15,8 @@ model Users {
   name      String
   email     String
   password  String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("USERS")
 }
@@ -24,8 +24,8 @@ model Users {
 model Category {
   id        String   @id @default(uuid())
   name      String
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   products Product[]
   @@map("CATEGORIES")
@@ -34,11 +34,11 @@ model Category {
 model Product {
   id          String   @id @default(uuid())
   name        String
-  price       Float
+  price       Float    @default(0.00)
   description String
   banner      String
-  createdAt   DateTime @default(now()) @db.Timestamp(6)
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   category    Category @relation(fields: [category_id], references: [id])
   category_id String
@@ -53,8 +53,8 @@ model Order {
   status    Boolean  @default(false)
   draft     Boolean  @default(true)
   name      String?
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
 
   items Item[]
@@ -65,8 +65,8 @@ model Item {
   id     String @id @default(uuid())
   amount Float
 
-  createdAt DateTime @default(now()) @db.Timestamp(6)
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   order   Order   @relation(fields: [order_id], references: [id])
   product Product @relation(fields: [product_id], references: [id])
